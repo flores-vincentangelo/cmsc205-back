@@ -86,9 +86,9 @@ async function login(req, res, next) {
   });
   res.cookie("token", token, { httpOnly: true });
   res.status(200).json({
-    email: "",
-    firstname: "",
-    lastname: "",
+    email: user.Email,
+    firstname: "Vincent Angelo",
+    lastname: "Flores",
     ...responses.OkResponseBuilder("OK"),
   });
 }

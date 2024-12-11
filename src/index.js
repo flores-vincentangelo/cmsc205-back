@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 const UserRoutes = require("./Routes/UserRoutes");
 
 let app = express();
-app.use(cors({ allowedHeaders: ["Conten-Type", "Authorization"] }));
+app.use(cors());
 
 let router = express.Router();
 app.use(express.json());
