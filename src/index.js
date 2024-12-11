@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "./env/variables.env" });
-let express = require("express");
+const express = require("express");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 // const errorHelper = require("./Helpers/errorHelper");
 // const jwtHelper = require("./Helpers/jwtHelper");
@@ -7,13 +8,14 @@ const cookieParser = require("cookie-parser");
 const UserRoutes = require("./Routes/UserRoutes");
 
 let app = express();
+app.use(cors({ allowedHeaders: ["Conten-Type", "Authorization"] }));
 
 let router = express.Router();
 app.use(express.json());
 app.use(cookieParser());
 
 router.post("/register", UserRoutes.register);
-// router.post("/login", UserRoutes.login);
+router.post("/login", UserRoutes.login);
 // router.get("/logout", UserRoutes.logout);
 
 // router.get(
@@ -98,7 +100,7 @@ app.use("/api/", router);
 // app.use(errorHelper.errorHandler);
 
 app.listen(parseInt(process.env.SERVPORT), function () {
-	console.log(
-		`Node server is running on http://localhost:${process.env.SERVPORT}/api/`
-	);
+  console.log(
+    `Node server is running on http://localhost:${process.env.SERVPORT}/api/`,
+  );
 });

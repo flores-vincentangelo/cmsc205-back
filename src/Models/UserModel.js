@@ -1,9 +1,9 @@
 class UserModel {
-	Email;
-	UnhashedPassword;
-	HashedPassword;
-    FirstName;
-    LastName;
+  Email;
+  UnhashedPassword;
+  HashedPassword;
+  FirstName;
+  LastName;
 }
 
-module.exports = UserModel
+module.exports = UserModel;

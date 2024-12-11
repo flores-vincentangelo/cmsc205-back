@@ -5,31 +5,31 @@ let DbConfigTables = { setupTables };
 module.exports = DbConfigTables;
 
 async function setupTables() {
-	await dropTable("accounts");
-	await setupAccountsTable();
-	await dropTable("categories");
-	await setupCategoriesTable();
-	await dropTable("companies");
-	await setupCompaniesTable();
-	await dropTable("employees");
-	await setupEmployeesTable();
-	await dropTable("roles");
-	await setupRolesTable();
-	await dropTable("flex_cycle_cutoffs");
-	await setupFlexCycleCutoffsTable();
-	await dropTable("flex_reimbursement");
-	await setupFlexReimbursementTable();
-	await dropTable("flex_reimbursement_details");
-	await setupFlexReimbursementDetailsTable();
+  await dropTable("accounts");
+  await setupAccountsTable();
+  await dropTable("categories");
+  await setupCategoriesTable();
+  await dropTable("companies");
+  await setupCompaniesTable();
+  await dropTable("employees");
+  await setupEmployeesTable();
+  await dropTable("roles");
+  await setupRolesTable();
+  await dropTable("flex_cycle_cutoffs");
+  await setupFlexCycleCutoffsTable();
+  await dropTable("flex_reimbursement");
+  await setupFlexReimbursementTable();
+  await dropTable("flex_reimbursement_details");
+  await setupFlexReimbursementDetailsTable();
 }
 
 async function dropTable(tableName) {
-	let query = `DROP TABLE IF EXISTS ${tableName};`;
-	return await DbConnection.runQuery(query);
+  let query = `DROP TABLE IF EXISTS ${tableName};`;
+  return await DbConnection.runQuery(query);
 }
 
 async function setupAccountsTable() {
-	let query = `CREATE TABLE accounts (
+  let query = `CREATE TABLE accounts (
     account_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
     employee_id MEDIUMINT UNSIGNED,
     password VARCHAR(255),
@@ -37,11 +37,11 @@ async function setupAccountsTable() {
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (account_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }
 
 async function setupCategoriesTable() {
-	var query = `CREATE TABLE categories (
+  var query = `CREATE TABLE categories (
         category_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
         code VARCHAR(255),
         name VARCHAR(255),
@@ -51,10 +51,10 @@ async function setupCategoriesTable() {
         updated_date  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         updated_by VARCHAR(255) DEFAULT 'SYSTEM',
         PRIMARY KEY (category_id))ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }
 async function setupCompaniesTable() {
-	var query = `CREATE TABLE companies (
+  var query = `CREATE TABLE companies (
         company_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
         code VARCHAR(255),
         name VARCHAR(255),
@@ -62,10 +62,10 @@ async function setupCompaniesTable() {
         logo VARCHAR(255),
         PRIMARY KEY (company_id)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }
 async function setupEmployeesTable() {
-	var query = `CREATE TABLE employees (
+  var query = `CREATE TABLE employees (
 
         employee_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
         employee_number MEDIUMINT UNSIGNED,
@@ -78,10 +78,10 @@ async function setupEmployeesTable() {
         role_id SMALLINT UNSIGNED,
         PRIMARY KEY (employee_id)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }
 async function setupFlexCycleCutoffsTable() {
-	var query = `CREATE TABLE flex_cycle_cutoffs (
+  var query = `CREATE TABLE flex_cycle_cutoffs (
 
         flex_cutoff_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
         start_date DATE,
@@ -92,10 +92,10 @@ async function setupFlexCycleCutoffsTable() {
         cut_off_description VARCHAR(255),
         PRIMARY KEY (flex_cutoff_id)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }
 async function setupFlexReimbursementTable() {
-	var query = `CREATE TABLE flex_reimbursement (
+  var query = `CREATE TABLE flex_reimbursement (
 
         flex_reimbursement_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
         employee_id MEDIUMINT UNSIGNED,
@@ -107,10 +107,10 @@ async function setupFlexReimbursementTable() {
         transaction_number VARCHAR(255),
         PRIMARY KEY (flex_reimbursement_id)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }
 async function setupFlexReimbursementDetailsTable() {
-	var query = `CREATE TABLE flex_reimbursement_details (
+  var query = `CREATE TABLE flex_reimbursement_details (
 
         flex_reimbursement_detail_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
         flex_reimbursement_id SMALLINT UNSIGNED, 
@@ -123,10 +123,10 @@ async function setupFlexReimbursementDetailsTable() {
         date_added TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         PRIMARY KEY (flex_reimbursement_detail_id)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }
 async function setupRolesTable() {
-	var query = `CREATE TABLE roles (
+  var query = `CREATE TABLE roles (
 
         role_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
         name VARCHAR(255),
@@ -134,5 +134,5 @@ async function setupRolesTable() {
         PRIMARY KEY(role_id)
 
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
-	return await DbConnection.runQuery(query);
+  return await DbConnection.runQuery(query);
 }

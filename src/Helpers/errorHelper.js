@@ -1,80 +1,80 @@
 const errorLog = require("../DataAccess/Files/errorLog");
 
 let errorHelpers = {
-	logErrorsToConsole,
-	logErrorsToFile,
-	clientErrorHandler,
-	errorHandler,
-	errorBuilder,
+  logErrorsToConsole,
+  logErrorsToFile,
+  clientErrorHandler,
+  errorHandler,
+  errorBuilder,
 };
 
 module.exports = errorHelpers;
 
 function logErrorsToConsole(err, req, res, next) {
-	let errorObj = errorHelpers.errorBuilder(err);
-	errorObj = {
-		...errorObj,
-		error: {
-			...errorObj.error,
-			stack: err.stack,
-		},
-	};
+  let errorObj = errorHelpers.errorBuilder(err);
+  errorObj = {
+    ...errorObj,
+    error: {
+      ...errorObj.error,
+      stack: err.stack,
+    },
+  };
 
-	console.error(`Log Entry: ${JSON.stringify(errorObj)}`);
-	console.error("*".repeat(80));
-	next(err);
+  console.error(`Log Entry: ${JSON.stringify(errorObj)}`);
+  console.error("*".repeat(80));
+  next(err);
 }
 
 function logErrorsToFile(err, req, res, next) {
-	let errorObject = errorHelpers.errorBuilder(err);
+  let errorObject = errorHelpers.errorBuilder(err);
 
-	errorObject.requestInfo = {
-		hostname: req.hostname,
-		path: req.path,
-		app: req.app,
-	};
+  errorObject.requestInfo = {
+    hostname: req.hostname,
+    path: req.path,
+    app: req.app,
+  };
 
-	errorObject.error = {
-		stack: err.stack,
-	};
+  errorObject.error = {
+    stack: err.stack,
+  };
 
-	errorLog.writeToFile(errorObject);
-	next(err);
+  errorLog.writeToFile(errorObject);
+  next(err);
 }
 
 function clientErrorHandler(err, req, res, next) {
-	if (req.xhr) {
-		res.status(500).json({
-			status: 500,
-			statusText: "Internal Server Error",
-			message: "XMLHttpRequest error",
-			error: {
-				errno: 0,
-				call: "XMLHttpRequest Call",
-				code: "INTERNAL_SERVER_ERROR",
-				message: "XMLHttpRequest error",
-			},
-		});
-	} else {
-		next(err);
-	}
+  if (req.xhr) {
+    res.status(500).json({
+      status: 500,
+      statusText: "Internal Server Error",
+      message: "XMLHttpRequest error",
+      error: {
+        errno: 0,
+        call: "XMLHttpRequest Call",
+        code: "INTERNAL_SERVER_ERROR",
+        message: "XMLHttpRequest error",
+      },
+    });
+  } else {
+    next(err);
+  }
 }
 
 function errorHandler(err, req, res, next) {
-	res.status(500).json(errorHelpers.errorBuilder(err));
+  res.status(500).json(errorHelpers.errorBuilder(err));
 }
 
 function errorBuilder(err) {
-	return {
-		status: 500,
-		statusText: "Internal Server Error",
-		message: err.message,
-		error: {
-			errno: err.errno,
-			call: err.syscall,
-			code: "INTERNAL_SERVER_ERROR",
-			message: err.message,
-			//stack: err.stack,
-		},
-	};
+  return {
+    status: 500,
+    statusText: "Internal Server Error",
+    message: err.message,
+    error: {
+      errno: err.errno,
+      call: err.syscall,
+      code: "INTERNAL_SERVER_ERROR",
+      message: err.message,
+      //stack: err.stack,
+    },
+  };
 }

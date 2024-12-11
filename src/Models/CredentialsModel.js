@@ -1,7 +1,7 @@
 class CredentialsModel {
-	Email;
-	UnhashedPassword;
-	HashedPassword;
+  Email;
+  UnhashedPassword;
+  HashedPassword;
 }
 
 module.exports = CredentialsModel;
