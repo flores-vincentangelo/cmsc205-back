@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 // const jwtHelper = require("./Helpers/jwtHelper");
 
 const UserRoutes = require("./Routes/UserRoutes");
+const MarkerRoutes = require("./Routes/MarkerRoutes");
 
 let app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ router.post("/login", UserRoutes.login);
 // router.get("/logout", UserRoutes.logout);
 
 router.get("/user/:email", UserRoutes.getUserByEmail)
+router.get("/markers", MarkerRoutes.getMarkers)
 
 // router.get(
 // 	"/employee-details",
