@@ -24,9 +24,8 @@ async function getMarkers(req, res, next) {
         }
     }
   })
-    console.log(finalMarkerArr);
   res.status(200).json({
-    markers: markerArr,
+      markers: finalMarkerArr,
     ...responses.OkResponseBuilder("Ok"),
   });
 }
