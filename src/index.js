@@ -18,6 +18,8 @@ router.post("/register", UserRoutes.register);
 router.post("/login", UserRoutes.login);
 // router.get("/logout", UserRoutes.logout);
 
+router.get("/user/:email", UserRoutes.getUserByEmail)
+
 // router.get(
 // 	"/employee-details",
 // 	jwtHelper.verifyToken,

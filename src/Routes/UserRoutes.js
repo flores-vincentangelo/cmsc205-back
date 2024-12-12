@@ -5,7 +5,7 @@ const UserModel = require("../Models/UserModel");
 const DbAccounts = require("../DataAccess/Database/DbAccounts");
 const jwtHelper = require("../Helpers/jwtHelper");
 
-let UserRoutes = { login, logout, register };
+let UserRoutes = { login, logout, register, getUserByEmail };
 module.exports = UserRoutes;
 
 let saltRounds = 10;
@@ -39,23 +39,23 @@ async function login(req, res, next) {
   let invalidCredsMessage = "Invalid username or password";
   let base64Encoding = req.headers.authorization.split(" ")[1];
   let credentials = Buffer.from(base64Encoding, "base64").toString().split(":");
-  let user = new CredentialsModel();
-  user.Email = credentials[0];
-  user.UnhashedPassword = credentials[1];
+  let creds = new CredentialsModel();
+  creds.Email = credentials[0];
+  creds.UnhashedPassword = credentials[1];
 
-  if (!user.Email || !user.UnhashedPassword) {
+  if (!creds.Email || !creds.UnhashedPassword) {
     res.status(401).json({
       ...responses.unathorizedResponseBuilder(invalidCredsMessage),
     });
     return;
   }
 
-  // let account;
-  // try {
-  // 	account = await DbAccounts.getAccountByEmployeeEmail(user.Email);
-  // } catch (error) {
-  // 	next(error);
-  // }
+  let user;
+  try {
+      user = await DbAccounts.getAccountByEmail(creds.Email)
+  } catch (error) {
+  	next(error);
+  }
 
   // if (!account) {
   // 	res.status(401).json({
@@ -79,16 +79,14 @@ async function login(req, res, next) {
   // 	}
   // }
 
-  let token = await jwtHelper.generateToken(null, user.Email);
+  let token = await jwtHelper.generateToken(null, creds.Email);
   res.set({
     "Access-Control-Expose-Headers": "*",
     "Access-Control-Allow-Headers": "*",
   });
   res.cookie("token", token, { httpOnly: true });
   res.status(200).json({
-    email: user.Email,
-    firstname: "Vincent Angelo",
-    lastname: "Flores",
+    user: {...user},
     ...responses.OkResponseBuilder("OK"),
   });
 }
@@ -98,4 +96,18 @@ async function logout(req, res, next) {
   res.status(200).json({
     ...responses.OkResponseBuilder("Cookies cleared"),
   });
+}
+
+async function getUserByEmail(req, res, next) {
+    try{
+        const email = req.params.email
+        const user = await DbAccounts.getAccountByEmail(email)
+        res.status(200).json({
+            user: {...user},
+            ...responses.OkResponseBuilder("Ok")
+        })
+    } catch (error) {
+        next(error);
+    }
+
 }

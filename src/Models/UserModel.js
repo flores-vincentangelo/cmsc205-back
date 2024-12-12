@@ -4,6 +4,7 @@ class UserModel {
   HashedPassword;
   FirstName;
   LastName;
+  Picture
 }
 
 module.exports = UserModel;

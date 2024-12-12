@@ -1,10 +1,12 @@
 const DbConnection = require("./DbConnection");
 const mysql = require("mysql");
 const AccountModel = require("../../Models/AccountModel");
+const UserModel = require("../../Models/UserModel");
 
 let DbAccounts = {
   register,
-  getAccountByEmployeeEmail,
+//   getAccountByEmployeeEmail,
+    getAccountByEmail
 };
 module.exports = DbAccounts;
 
@@ -43,3 +45,26 @@ async function getAccountByEmployeeEmail(email) {
   }
   return account;
 }
+
+async function getAccountByEmail(email) {
+    const singleResult = accounts.find(account => account.email === email);
+    let user = new UserModel();
+    if (singleResult) {
+        user.Email = singleResult.email;
+        user.FirstName = singleResult.first_name;
+        user.LastName = singleResult.last_name;
+        user.Picture = singleResult.picture;
+        user.HashedPassword = singleResult.password;
+    }
+    return user;
+}
+
+const accounts = [
+    {
+        email: "vincentflores88@gmail.com",
+        first_name: "Vincent Angelo",
+        last_name: "Flores",
+        password: "blabla must be hashed",
+        picture: "DSC_0017.JPG"
+    }
+]
