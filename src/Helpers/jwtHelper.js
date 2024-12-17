@@ -22,8 +22,8 @@ function getAudienceFromToken(token) {
 
 async function generateToken(prevToken, userEmail) {
   const email = userEmail;
-  // const email = userEmail || getEmailFromToken(prevToken);
-  // const employee = await DbEmployees.getEmployeeDetailsByEmail(email);
+//   const email = userEmail || getEmailFromToken(prevToken);
+//   const employee = await DbEmployees.getEmployeeDetailsByEmail(email);
 
   // let audience;
   // switch (employee.Role) {

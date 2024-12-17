@@ -1,0 +1,2 @@
+{"email":"vincentflores88@gmail.com","first_name":"vincent","last_name":"flores","password":"$2b$10$fhUk0oObXP/1ykGWfi1Mpu8bETgGVRjc.t55br2U4lDizulvbYS.y","picture":"DSC_0017.JPG"}
+{"email":"asd@asd","first_name":"asd","last_name":"asd","password":"$2b$10$k6fiPwgavxQV1aNC3Y5HmerfHwkvP54b0MYBJCReKw2/oaelHRZIy","picture":"puppy.jpg"}

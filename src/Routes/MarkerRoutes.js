@@ -1,6 +1,7 @@
 const responses = require("../Helpers/responsesHelper");
 const DbMarker = require("../DataAccess/Database/DbMarker");
 const DbAccounts = require("../DataAccess/Database/DbAccounts");
+const jsonAccounts = require("../DataAccess/json/jsonAccounts");
 
 let MarkerRoutes = { getMarkers };
 module.exports = MarkerRoutes;
@@ -10,7 +11,7 @@ async function getMarkers(req, res, next) {
   const promiseArr = markerArr
     .map((marker) => marker.UserEmail)
     .filter(onlyUnique)
-    .map((userEmail) => DbAccounts.getAccountByEmail(userEmail));
+    .map((userEmail) => jsonAccounts.getAccountByEmail(userEmail));
 
   userDetailsArr = await Promise.all(promiseArr);
 

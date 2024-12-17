@@ -58,13 +58,3 @@ async function getAccountByEmail(email) {
     }
     return user;
 }
-
-const accounts = [
-    {
-        email: "vincentflores88@gmail.com",
-        first_name: "Vincent Angelo",
-        last_name: "Flores",
-        password: "blabla must be hashed",
-        picture: "DSC_0017.JPG"
-    }
-]
