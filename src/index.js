@@ -17,6 +17,7 @@ app.use(cookieParser());
 
 router.post("/register", UserRoutes.register);
 router.post("/login", UserRoutes.login);
+router.post("/register", UserRoutes.register);
 // router.get("/logout", UserRoutes.logout);
 
 router.get("/user/:email", UserRoutes.getUserByEmail)

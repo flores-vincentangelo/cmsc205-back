@@ -3,6 +3,7 @@ const responses = require("../Helpers/responsesHelper");
 const CredentialsModel = require("../Models/CredentialsModel");
 const UserModel = require("../Models/UserModel");
 const DbAccounts = require("../DataAccess/Database/DbAccounts");
+const jsonAccounts = require('../DataAccess/json/jsonAccounts')
 const jwtHelper = require("../Helpers/jwtHelper");
 
 let UserRoutes = { login, logout, register, getUserByEmail };
@@ -16,16 +17,20 @@ async function register(req, res, next) {
   user.UnhashedPassword = req.body.password;
   user.FirstName = req.body.firstname;
   user.LastName = req.body.lastname;
+    user.Picture = "DSC_0017.JPG"
 
   try {
     // let account = await DbAccounts.getAccountByEmployeeEmail(user.Email);
-    // if (account) {
-    // 	res.status(409).json({
-    // 		...responses.conflictResponseBuilder("User already exists"),
-    // 	});
-    // 	return;
-    // }
+    let account = await jsonAccounts.getAccountByEmail(user.Email);
+    if (account) {
+    	res.status(409).json({
+    		...responses.conflictResponseBuilder("User already exists"),
+    	});
+    	return;
+    }
     user.HashedPassword = await bcrypt.hash(user.UnhashedPassword, saltRounds);
+    await jsonAccounts.register(user)
+    console.log(user)
     // await DbAccounts.register(user);
     res.status(201).json({
       ...responses.createdBuilder("User Added"),
@@ -52,7 +57,8 @@ async function login(req, res, next) {
 
   let user;
   try {
-      user = await DbAccounts.getAccountByEmail(creds.Email)
+    user = await jsonAccounts.getAccountByEmail(creds.Email);
+    //   user = await DbAccounts.getAccountByEmail(creds.Email)
   } catch (error) {
   	next(error);
   }
