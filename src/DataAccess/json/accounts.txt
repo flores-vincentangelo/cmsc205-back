@@ -1,4 +1,0 @@
-{"email":"vincentflores188@gmail.com","first_name":"vincent","last_name":"flores","password":"$2b$10$J/BTteobjMIDQJ//ToHfN.MlmDNnn46h2NcqaY4Y.bDmz2qc2DVNe","picture":"DSC_0017.JPG"}
-{"email":"vincentflores288@gmail.com","first_name":"vincent","last_name":"flores","password":"$2b$10$GXRt5uTk85DVCoqzDVFTxe47j3PI75mYtloy3O087ve9nKfFcLMMy","picture":"DSC_0017.JPG"}
-{"email":"vincentflores388@gmail.com","first_name":"vincent","last_name":"flores","password":"$2b$10$eAmjLtzjxKdvULAVEAXDe..VvtUTeuHKmB6GK1DBiDGhaAUi7GO7G","picture":"DSC_0017.JPG"}
-{"email":"vincentflores88@gmail.com","first_name":"vincent","last_name":"flores","password":"$2b$10$y4Db1sXwIBTzqDydtkCSgOAbDJTNQPvlqhnCI8qlLZ2w/6hXoEkte","picture":"DSC_0017.JPG"}

@@ -33,7 +33,6 @@ async function getAccountByEmail(email) {
         if (userObj.email === email) {
             user = userObj
         }
-        console.log(line)
     }
     return user;
 }
